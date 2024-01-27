@@ -1,21 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "raylib.h"
 #include "raymath.h"
 #include "state_machine.h"
 #include "constants.h"
 #include "fonts.h"
 #include "textures.h"
-
-void draw_title(const Font* font) {
-    const char* text = "BREAKOUT";
-    const int size = 20;
-    const float text_width = MeasureText(text, size);
-    const Vector2 title_pos = {GAMESCREENWIDTH / 2.0 - text_width / 2.0, GAMESCREENHEIGHT / 2.0 - size / 2.0};
-    DrawTextEx(*font, text, title_pos, size, 1, LIGHTGRAY);
-}
+#include "sounds.h"
 
 int main(void) {
+
+    time_t t;
+    srand((unsigned) time(&t));
 
     SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
     InitWindow(SCREENWIDTH, SCREENHEIGHT, "Breakout");
@@ -26,6 +23,7 @@ int main(void) {
     Rectangle destRec = { 0, 0, GAMESCREENWIDTH + 1, GAMESCREENHEIGHT + 1 };
     LoadGameFonts();
     LoadGameTextures();
+    LoadGameSounds();
 
 
     // Render texture initialization, used to hold the rendering result so we can easily resize it
@@ -57,6 +55,7 @@ int main(void) {
     UnloadTexture(background);
     UnloadGameFonts();
     UnloadGameTextures();
+    UnloadGameSounds();
     CloseWindow();
     return 0;
 }

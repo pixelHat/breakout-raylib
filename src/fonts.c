@@ -2,7 +2,7 @@
 #include "raylib.h"
 #include "fonts.h"
 
-Fonts globalFonts = { NULL };
+Fonts globalFonts = { };
 
 void LoadGameFonts() {
     Font font = LoadFont("fonts/font.ttf");

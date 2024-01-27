@@ -10,7 +10,7 @@
 Game game = { STATE_MENU };
 
 MenuState menuState = { 0 };
-PlayState playState = { };
+PlayState playState = {};
 
 void Render() {
   switch (game.currentState) {
@@ -41,6 +41,10 @@ void exitMenuState() {
 void enterIntoPlayState() {
   if (playState.quads == NULL) {
     playState.quads = generateQuadsPaddles();
+    playState.paddle = Paddle_init(1, 0);
+    playState.isPaused = false;
   }
+  playState.ball = Ball_init(0);
+  playState.ball_quads = generateQuadsBalls();
   game.currentState = STATE_PLAY;
 }

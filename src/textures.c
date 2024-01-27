@@ -3,7 +3,7 @@
 GlobalTextures globalTextures;
 
 void LoadGameTextures() {
-    globalTextures.paddle = LoadTexture("graphics/blocks.png");
+    globalTextures.paddle = LoadTexture("graphics/breakout.png");
 }
 
 void UnloadGameTextures() {
