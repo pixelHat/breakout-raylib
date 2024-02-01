@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include "paddle.h"
 #include "ball.h"
+#include "bricks.h"
 
 #ifndef STATEMACHINE_H
 #define STATEMACHINE_H
@@ -26,6 +27,8 @@ typedef struct {
     bool isPaused;
     Ball ball;
     Rectangle* ball_quads;
+    Rectangle* bricks_quads;
+    Bricks bricks;
 } PlayState;
 
 void DrawTitle();

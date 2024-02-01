@@ -46,5 +46,7 @@ void enterIntoPlayState() {
   }
   playState.ball = Ball_init(0);
   playState.ball_quads = generateQuadsBalls();
+  playState.bricks_quads = generateQuadsBricks();
+  playState.bricks = create_map(0);
   game.currentState = STATE_PLAY;
 }

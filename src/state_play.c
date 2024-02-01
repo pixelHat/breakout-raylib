@@ -7,6 +7,7 @@
 #include "fonts.h"
 #include "constants.h"
 #include "ball.h"
+#include "bricks.h"
 
 #ifndef STATE_MENU_H
 #define STATE_MENU_H
@@ -14,6 +15,9 @@
 void RenderStatePlay(Game game, PlayState* state) {
     Paddle_draw(&state->paddle, state->quads);
     Ball_draw(&state->ball, state->ball_quads);
+    for (int i = 0; i < state->bricks.size; i++) {
+        Brick_draw(&state->bricks.bricks[i], state->bricks_quads);
+    }
     if (state->isPaused) {
         Vector2 fontSize = MeasureTextEx(globalFonts.DEFAULT_FONT, "PAUSED", FONTLARGE, 1);
         DrawTextEx(
@@ -38,6 +42,20 @@ void UpdateStatePlay(Game game, PlayState* state) {
 
     Paddle_update(&state->paddle);
     Ball_update(&state->ball);
+
+    for (int i = 0; i < state->bricks.size; i++) {
+        Brick* b = &(state->bricks.bricks[i]);
+        Rectangle rec = (Rectangle) {
+            .x = b->position.x,
+            .y = b->position.y,
+            .width = b->width,
+            .height = b->height
+        };
+        if (b->in_play && Ball_collide(state->ball, rec)) {
+            Brick_hit(b);
+        }
+
+    }
 
     const Rectangle paddle_rectangle = {
         .x = state->paddle.position.x,
