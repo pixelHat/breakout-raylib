@@ -12,6 +12,7 @@ Paddle Paddle_init(int size, int skin) {
         skin = skin,
         .width = 64,
         .height = 16,
+        .dx = 0
     };
 }
 
@@ -21,9 +22,11 @@ void Paddle_draw(Paddle* paddle, Rectangle* squads) {
 
 void Paddle_update(Paddle* paddle) {
     if (IsKeyDown(KEY_RIGHT)) {
+        paddle->dx = PADDLE_SPEED;
         paddle->position.x = MIN(paddle->position.x + PADDLE_SPEED * GetFrameTime(), GAMESCREENWIDTH - paddle->width);
     }
     if (IsKeyDown(KEY_LEFT)) {
+        paddle->dx = -PADDLE_SPEED;
         paddle->position.x = MAX(paddle->position.x - PADDLE_SPEED * GetFrameTime(), 0);
     }
 }

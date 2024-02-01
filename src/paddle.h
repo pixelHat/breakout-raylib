@@ -10,6 +10,7 @@ typedef struct {
   int skin;
   int width;
   int height;
+  int dx;
 } Paddle;
 
 Paddle Paddle_init(int size, int skin);

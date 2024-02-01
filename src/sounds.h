@@ -8,6 +8,7 @@ typedef struct {
     Sound pause;
     Sound wall_hit;
     Sound paddle_hit;
+    Sound brick_hit;
 } Sounds;
 
 extern Sounds globalSounds;

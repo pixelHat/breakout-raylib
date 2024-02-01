@@ -1,3 +1,4 @@
+#include <math.h>
 #include "raylib.h"
 #include "fonts.h"
 #include "constants.h"
@@ -51,7 +52,22 @@ void UpdateStatePlay(Game game, PlayState* state) {
             .width = b->width,
             .height = b->height
         };
+
         if (b->in_play && Ball_collide(state->ball, rec)) {
+            if (state->ball.position.x + 2 < b->position.x && state->ball.dx > 0) {
+                state->ball.dx = -state->ball.dx;
+                state->ball.position.x = b->position.x - 8;
+            } else if (state->ball.position.x + 6 > b->position.x + b->width && state->ball.dx < 0) {
+                state->ball.dx = -state->ball.dx;
+                state->ball.position.x = b->position.x + 32;
+            } else if (state->ball.position.y < b->position.y) {
+                state->ball.dy = -state->ball.dy;
+                state->ball.position.y = b->position.y - 8;
+            } else {
+                state->ball.dy = -state->ball.dy;
+                state->ball.position.y = b->position.y + 16;
+            }
+            state->ball.dy = state->ball.dy * 1.02;
             Brick_hit(b);
         }
 
@@ -64,8 +80,15 @@ void UpdateStatePlay(Game game, PlayState* state) {
         .height = state->paddle.height
     };
     if(Ball_collide(state->ball, paddle_rectangle)) {
+        state->ball.position.y -= 8;
         state->ball.dy = -state->ball.dy;
+        if (state->ball.position.x < state->paddle.position.x + state->paddle.width / 2 && state->paddle.dx < 0) {
+            state->ball.dx = -50 + -(8 * (state->paddle.position.x + state->paddle.width / 2 - state->ball.position.x));
+        } else if (state->ball.position.x > state->paddle.position.x + state->paddle.width / 2 && state->paddle.dx > 0) {
+            state->ball.dx = 50 + (8 * fabs(state->paddle.position.x + state->paddle.width / 2 - state->ball.position.x));
+        }
         PlaySound(globalSounds.paddle_hit);
+
     }
 }
 #endif
