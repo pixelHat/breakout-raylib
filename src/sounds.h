@@ -9,6 +9,7 @@ typedef struct {
     Sound wall_hit;
     Sound paddle_hit;
     Sound brick_hit;
+    Sound hurt;
 } Sounds;
 
 extern Sounds globalSounds;

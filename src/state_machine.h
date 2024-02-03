@@ -14,7 +14,6 @@ typedef enum {
 
 typedef struct {
     GameState currentState;
-
 } Game;
 
 typedef struct {
@@ -29,14 +28,21 @@ typedef struct {
     Rectangle* ball_quads;
     Rectangle* bricks_quads;
     Bricks bricks;
+    int score;
+    int lives;
+    Rectangle* hearts_quads;
 } PlayState;
+
+typedef struct {
+  int score;
+} GameOverState;
 
 void DrawTitle();
 void DrawPlay();
 
 void Update();
 void Render();
-void enterIntoPlayState();
-void exitMenuState();
-
+void enterIntoMenuStateState();
+void enterIntoPlayState(int health, int score);
+void enterIntoGameOverState(int score);
 #endif

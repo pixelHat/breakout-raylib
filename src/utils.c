@@ -1,23 +1,26 @@
 #include "utils.h"
 #include "textures.h"
 
-Rectangle* generateQuads(int tile_width, int tile_height) {
-    int sheet_width  = globalTextures.paddle.width / tile_width;
-    int sheet_height = globalTextures.paddle.height / tile_height;
+Rectangle* generateQuads(Texture texture, int tile_width, int tile_height) {
+    int sheet_width  = texture.width / tile_width;
+    int sheet_height = texture.height / tile_height;
     int sheet_counter = 0;
     Rectangle* spritesheet = (Rectangle*) malloc(sizeof(Rectangle) * sheet_width * sheet_height);
     for (int y = 0; y < sheet_height; y++) {
         for (int x = 0; x < sheet_width; x++) {
             spritesheet[sheet_counter] = (Rectangle) { x * tile_width, y * tile_height, tile_width, tile_height };
             sheet_counter++;
-            break;
         }
     }
     return spritesheet;
 }
 
+Rectangle* generateQuadsHearts() {
+    return generateQuads(globalTextures.hearts, 10, 9);
+}
+
 Rectangle* generateQuadsBricks() {
-    return generateQuads(32, 16);
+    return generateQuads(globalTextures.paddle, 32, 16);
 }
 
 Rectangle* generateQuadsPaddles() {

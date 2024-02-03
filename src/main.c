@@ -31,7 +31,7 @@ int main(void) {
     SetTextureFilter(target.texture, TEXTURE_FILTER_BILINEAR);  // Texture scale filter to use
     SetTargetFPS(60);
 
-    enterIntoPlayState();
+    // enterIntoGameOverState(30);
 
     while (!WindowShouldClose()) {
         float scale = MIN((float)GetScreenWidth()/GAMESCREENWIDTH, (float)GetScreenHeight()/GAMESCREENHEIGHT);
