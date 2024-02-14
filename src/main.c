@@ -32,8 +32,6 @@ int main(void) {
     SetTargetFPS(60);
     SetMasterVolume(0.1);
 
-    // enterIntoGameOverState(30);
-
     while (!WindowShouldClose()) {
         float scale = MIN((float)GetScreenWidth()/GAMESCREENWIDTH, (float)GetScreenHeight()/GAMESCREENHEIGHT);
 

@@ -19,7 +19,7 @@ void draw_health(int health, Rectangle* hearts_quads);
 
 void RenderStatePlay(Game game, PlayState* state) {
     Paddle_draw(&state->paddle, state->quads);
-    Ball_draw(&state->ball, state->ball_quads);
+    BallDraw(&state->ball, state->ball_quads);
     draw_score(state->score);
     draw_health(state->lives, state->hearts_quads);
 
@@ -50,7 +50,7 @@ void UpdateStatePlay(Game game, PlayState* state) {
     }
 
     Paddle_update(&state->paddle);
-    Ball_update(&state->ball);
+    BallUpdate(&state->ball);
 
     for (int i = 0; i < state->bricks.size; i++) {
         Brick* b = &(state->bricks.bricks[i]);
@@ -61,7 +61,7 @@ void UpdateStatePlay(Game game, PlayState* state) {
             .height = b->height
         };
 
-        if (b->in_play && Ball_collide(state->ball, rec)) {
+        if (b->in_play && BallCollide(state->ball, rec)) {
             if (state->ball.position.x + 2 < b->position.x && state->ball.dx > 0) {
                 state->ball.dx = -state->ball.dx;
                 state->ball.position.x = b->position.x - 8;
@@ -76,7 +76,7 @@ void UpdateStatePlay(Game game, PlayState* state) {
                 state->ball.position.y = b->position.y + 16;
             }
             state->ball.dy = state->ball.dy * 1.02;
-            state->score += 10;
+            state->score += (b->tier * 200 + b->color * 25);
             Brick_hit(b);
         }
 
@@ -88,7 +88,7 @@ void UpdateStatePlay(Game game, PlayState* state) {
         .width = state->paddle.width,
         .height = state->paddle.height
     };
-    if(Ball_collide(state->ball, paddle_rectangle)) {
+    if(BallCollide(state->ball, paddle_rectangle)) {
         state->ball.position.y -= 8;
         state->ball.dy = -state->ball.dy;
         if (state->ball.position.x < state->paddle.position.x + state->paddle.width / 2 && state->paddle.dx < 0) {

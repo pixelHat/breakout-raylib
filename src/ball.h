@@ -13,9 +13,9 @@ typedef struct {
   int dy;
 } Ball;
 
-Ball Ball_init(int skin);
-void Ball_update(Ball* ball);
-void Ball_draw(Ball* ball, Rectangle* squads);
-bool Ball_collide(Ball ball, Rectangle target);
+Ball BallInit(int skin);
+void BallUpdate(Ball* ball);
+void BallDraw(Ball* ball, Rectangle* squads);
+bool BallCollide(Ball ball, Rectangle target);
 
 #endif

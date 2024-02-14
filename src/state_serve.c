@@ -10,7 +10,7 @@
 
 void RenderStateServe(Game game, PlayState* state) {
     Paddle_draw(&state->paddle, state->quads);
-    Ball_draw(&state->ball, state->ball_quads);
+    BallDraw(&state->ball, state->ball_quads);
     draw_score(state->score);
     draw_health(state->lives, state->hearts_quads);
 

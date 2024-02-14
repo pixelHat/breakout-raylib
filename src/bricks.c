@@ -14,13 +14,31 @@ void Brick_draw(Brick* brick, Rectangle* squads) {
 }
 
 void Brick_hit(Brick* brick) {
-    PlaySound(globalSounds.brick_hit);
-    brick->in_play = false;
+    PlaySound(globalSounds.brick_hit_2);
+
+    if (brick->tier > -1) {
+        if (brick->color == 1) {
+            brick->tier--;
+            brick->color = 5;
+        } else {
+            brick->color--;
+        }
+    } else {
+        if (brick->color == 0) {
+            brick->in_play = false;
+        } else {
+            brick->color--;
+        }
+    }
+
+    if (!brick->in_play) {
+        PlaySound(globalSounds.brick_hit_1);
+    }
 }
 
 Bricks create_map(int level) {
-    int number_of_rows = randomInt(1, 5);
-    int number_of_cols = randomInt(7, 13);
+    int number_of_rows = randomInt(1, 4);
+    int number_of_cols = randomInt(7, 12);
 
     if (number_of_cols % 2 == 1) {
         number_of_cols++;
@@ -72,8 +90,6 @@ Bricks create_map(int level) {
                 color = solid_color;
                 tier = solid_tier;
             }
-
-            printf("tier = %d; color = %d", tier, color);
 
             bricks.bricks[bricks.size++] = (Brick) {
                 .position = (Vector2) {

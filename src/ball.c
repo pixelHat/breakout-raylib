@@ -4,7 +4,7 @@
 #include "utils.h"
 #include "sounds.h"
 
-Ball Ball_init(int skin) {
+Ball BallInit(int skin) {
     return (Ball) {
         .position = { GAMESCREENWIDTH / 2.0 - 4, GAMESCREENHEIGHT - 42 },
         .skin = skin,
@@ -15,11 +15,11 @@ Ball Ball_init(int skin) {
     };
 }
 
-void Ball_draw(Ball* ball, Rectangle* squads) {
+void BallDraw(Ball* ball, Rectangle* squads) {
     DrawTextureRec(globalTextures.paddle, squads[ball->skin], ball->position, WHITE);
 }
 
-void Ball_update(Ball* ball) {
+void BallUpdate(Ball* ball) {
     ball->position.x += ball->dx * GetFrameTime();
     ball->position.y += ball->dy * GetFrameTime();
 
@@ -42,7 +42,7 @@ void Ball_update(Ball* ball) {
     }
 }
 
-bool Ball_collide(Ball ball, Rectangle target) {
+bool BallCollide(Ball ball, Rectangle target) {
     const Rectangle ball_rectangle = (Rectangle) {
         .x = ball.position.x,
         .y = ball.position.y,

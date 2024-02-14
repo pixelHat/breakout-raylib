@@ -2,7 +2,7 @@ CC := gcc
 CFLAGS := -Wall -I/usr/include/raylib -lraylib -lm -lpthread -ldl -lrt -lX11
 
 SRC := src/*
-EXEC := my_game.o
+EXEC := game.o
 
 all: $(EXEC)
 

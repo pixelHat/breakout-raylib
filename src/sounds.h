@@ -8,7 +8,8 @@ typedef struct {
     Sound pause;
     Sound wall_hit;
     Sound paddle_hit;
-    Sound brick_hit;
+    Sound brick_hit_1;
+    Sound brick_hit_2;
     Sound hurt;
 } Sounds;
 
