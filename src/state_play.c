@@ -106,7 +106,7 @@ void UpdateStatePlay(Game game, PlayState* state) {
         if (state->lives == 0) {
             enterIntoGameOverState(state->score);
         } else {
-            enterIntoPlayState(state->lives, state->score);
+            enterIntoServeState(state->lives, state->score);
         }
     }
 

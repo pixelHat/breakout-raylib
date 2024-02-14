@@ -30,6 +30,7 @@ int main(void) {
     RenderTexture2D target = LoadRenderTexture(GAMESCREENWIDTH, GAMESCREENHEIGHT);
     SetTextureFilter(target.texture, TEXTURE_FILTER_BILINEAR);  // Texture scale filter to use
     SetTargetFPS(60);
+    SetMasterVolume(0.1);
 
     // enterIntoGameOverState(30);
 

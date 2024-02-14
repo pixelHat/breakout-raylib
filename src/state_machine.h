@@ -9,6 +9,7 @@
 typedef enum {
     STATE_MENU,
     STATE_PLAY,
+    STATE_SERVE,
     STATE_GAME_OVER
 } GameState;
 
@@ -43,6 +44,7 @@ void DrawPlay();
 void Update();
 void Render();
 void enterIntoMenuStateState();
-void enterIntoPlayState(int health, int score);
+void enterIntoPlayState();
+void enterIntoServeState(int health, int score);
 void enterIntoGameOverState(int score);
 #endif
