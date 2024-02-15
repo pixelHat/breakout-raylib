@@ -8,8 +8,10 @@
 #include "fonts.h"
 #include "textures.h"
 #include "sounds.h"
+#include "utils.h"
 
 int main(void) {
+
 
     time_t t;
     srand((unsigned) time(&t));
@@ -18,6 +20,8 @@ int main(void) {
     InitWindow(SCREENWIDTH, SCREENHEIGHT, "Breakout");
     SetWindowMinSize(320, 240);
 
+    Score* scores = UtilsLoadScore();
+
     Texture2D background = LoadTexture("graphics/background.png");
     NPatchInfo nPatchInfo = { { 0, 0, background.width, background.height }, 12, 12, 12, 12 };
     Rectangle destRec = { 0, 0, GAMESCREENWIDTH + 1, GAMESCREENHEIGHT + 1 };
@@ -25,6 +29,7 @@ int main(void) {
     LoadGameTextures();
     LoadGameSounds();
 
+    StateMachineSetScore();
 
     // Render texture initialization, used to hold the rendering result so we can easily resize it
     RenderTexture2D target = LoadRenderTexture(GAMESCREENWIDTH, GAMESCREENHEIGHT);

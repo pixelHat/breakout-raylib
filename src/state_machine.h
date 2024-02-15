@@ -2,6 +2,7 @@
 #include "paddle.h"
 #include "ball.h"
 #include "bricks.h"
+#include "utils.h"
 
 #ifndef STATEMACHINE_H
 #define STATEMACHINE_H
@@ -12,6 +13,7 @@ typedef enum {
     STATE_SERVE,
     STATE_GAME_OVER,
     STATE_VICTORY,
+    STATE_HIGHSCORES,
 } GameState;
 
 typedef struct {
@@ -40,14 +42,20 @@ typedef struct {
   int score;
 } GameOverState;
 
+typedef struct {
+    Score* scores;
+} GlobalState;
+
 void DrawTitle();
 void DrawPlay();
 
 void Update();
 void Render();
-void enterIntoMenuStateState();
+void enterIntoMenuState();
 void enterIntoPlayState();
 void enterIntoServeState(int health, int score, int level);
 void enterIntoGameOverState(int score);
 void enterIntoVictoryState(int health, int score, int level);
+void enterIntoHighScoresState();
+void StateMachineSetScore();
 #endif

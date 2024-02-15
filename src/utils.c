@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "utils.h"
 #include "textures.h"
@@ -87,4 +88,51 @@ void UtilsDrawHealth(int health, Rectangle* squads) {
         DrawTextureRec(globalTextures.hearts, squads[1], (Vector2) { health_x, 4 }, WHITE);
         health_x += 11;
     }
+}
+
+Score* UtilsLoadScore() {
+    FILE* file = fopen("breakout.lst", "r+");
+    if(file == NULL) {
+        exit(1);
+    }
+
+    bool name = true;
+    char* currentName = NULL;
+    int counter = 0;
+
+    Score* scores = (Score*) malloc(sizeof(Score) * 10);
+
+    for(int i = 0; i < 10; i++) {
+        scores[i].name = "---";
+        scores[i].score = 0;
+    }
+
+    char line[100];
+    while(fgets(line, 100, file) != NULL) {
+        if(name) {
+            currentName = strtok(line, "\n");
+            scores[counter].name = (char*) malloc(sizeof(char) * (strlen(currentName) + 1));
+            strcpy(scores[counter].name, currentName);
+        } else {
+            scores[counter].score = atoi(strtok(line, "\n"));
+            counter++;
+        }
+        name = !name;
+    }
+
+    for (int i = 0; i < 10; i++) {
+        printf("%s: %d\n", scores[i].name, scores[i].score);
+    }
+
+    fclose(file);
+    return scores;
+}
+
+void UtilsDrawCenteredText(const char* text, int size, int y) {
+    const Vector2 measture = MeasureTextEx(globalFonts.DEFAULT_FONT, text, size, 1);
+    const Vector2 position = {
+        .x = GAMESCREENWIDTH / 2.0 - measture.x / 2.0,
+        .y = y
+    };
+    DrawTextEx(globalFonts.DEFAULT_FONT, text, position, size, 1, WHITE);
 }

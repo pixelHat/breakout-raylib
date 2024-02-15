@@ -9,12 +9,14 @@
 #include "state_serve.h"
 #include "state_victory.h"
 #include "state_game_over.h"
+#include "state_highscores.h"
 
 Game game = { STATE_MENU };
 
 MenuState menuState = { 0 };
 PlayState playState = {};
 GameOverState gameOverState = {};
+GlobalState  globalState = {};
 
 void setUpPlayState(int health, int score, int level);
 
@@ -31,6 +33,9 @@ void Render() {
             break;
         case STATE_VICTORY:
             RenderStateVictory(game, &playState);
+            break;
+        case STATE_HIGHSCORES:
+            RenderStateHighScores(&globalState);
             break;
         case STATE_GAME_OVER:
             RenderStateGameOver(game, &gameOverState);
@@ -52,13 +57,16 @@ void Update() {
         case STATE_VICTORY:
             UpdateStateVictory(game, &playState);
             break;
+        case STATE_HIGHSCORES:
+            UpdateStateHighScores();
+            break;
         case STATE_GAME_OVER:
             UpdateStateGameOver(game, &gameOverState);
             break;
     }
 }
 
-void enterIntoMenuStateState() {
+void enterIntoMenuState(Score* scores) {
     menuState.selected = 0;
     game.currentState = STATE_MENU;
 }
@@ -80,6 +88,15 @@ void enterIntoServeState(int health, int score, int level) {
 void enterIntoVictoryState(int health, int score, int level) {
     setUpPlayState(health, score, level);
     game.currentState = STATE_VICTORY;
+}
+
+void enterIntoHighScoresState() {
+    game.currentState = STATE_HIGHSCORES;
+}
+
+void StateMachineSetScore() {
+    Score* scores = UtilsLoadScore();
+    globalState.scores = scores;
 }
 
 // private

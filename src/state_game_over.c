@@ -29,6 +29,6 @@ void RenderStateGameOver(Game game, GameOverState* state) {
 
 void UpdateStateGameOver(Game game, GameOverState* state) {
   if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_SPACE)) {
-    enterIntoMenuStateState();
+    enterIntoMenuState();
   }
 }
