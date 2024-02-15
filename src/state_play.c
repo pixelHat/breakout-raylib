@@ -1,6 +1,7 @@
 #include <math.h>
 #include <stdio.h>
 #include "raylib.h"
+#include "state_play.h"
 #include "fonts.h"
 #include "constants.h"
 #include "state_machine.h"
@@ -78,6 +79,10 @@ void UpdateStatePlay(Game game, PlayState* state) {
             state->ball.dy = state->ball.dy * 1.02;
             state->score += (b->tier * 200 + b->color * 25);
             Brick_hit(b);
+            if (PlayStateCheckVictory(state)) {
+                PlaySound(globalSounds.victory);
+                enterIntoVictoryState(state->lives, state->score, state->lives + 1);
+            }
         }
 
     }
@@ -106,7 +111,7 @@ void UpdateStatePlay(Game game, PlayState* state) {
         if (state->lives == 0) {
             enterIntoGameOverState(state->score);
         } else {
-            enterIntoServeState(state->lives, state->score);
+            enterIntoServeState(state->lives, state->score, state->level + 1);
         }
     }
 
@@ -132,5 +137,14 @@ void draw_score(int score) {
     Vector2 measure_score_text = MeasureTextEx(globalFonts.DEFAULT_FONT, "SCORE", 8, 1);
     DrawTextEx(globalFonts.DEFAULT_FONT, "SCORE", (Vector2) { GAMESCREENWIDTH - 60, 5 }, 8, 1, WHITE);
     DrawTextEx(globalFonts.DEFAULT_FONT, score_str, (Vector2) { GAMESCREENWIDTH - 50 + measure_score_text.x, 5 }, 8, 1, WHITE);
+}
+
+bool PlayStateCheckVictory(PlayState* state) {
+    for (int i = 0; i < state->bricks.size; i++) {
+        if (state->bricks.bricks[i].in_play) {
+            return false;
+        }
+    }
+    return true;
 }
 #endif

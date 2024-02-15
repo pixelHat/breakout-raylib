@@ -10,6 +10,7 @@ void LoadGameSounds() {
     globalSounds.brick_hit_1 = LoadSound("sounds/brick-hit-1.wav");
     globalSounds.brick_hit_2 = LoadSound("sounds/brick-hit-2.wav");
     globalSounds.hurt = LoadSound("sounds/hurt.wav");
+    globalSounds.victory = LoadSound("sounds/victory.wav");
 }
 
 void UnloadGameSounds() {

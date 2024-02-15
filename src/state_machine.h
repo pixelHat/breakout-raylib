@@ -10,7 +10,8 @@ typedef enum {
     STATE_MENU,
     STATE_PLAY,
     STATE_SERVE,
-    STATE_GAME_OVER
+    STATE_GAME_OVER,
+    STATE_VICTORY,
 } GameState;
 
 typedef struct {
@@ -32,6 +33,7 @@ typedef struct {
     int score;
     int lives;
     Rectangle* hearts_quads;
+    int level;
 } PlayState;
 
 typedef struct {
@@ -45,6 +47,7 @@ void Update();
 void Render();
 void enterIntoMenuStateState();
 void enterIntoPlayState();
-void enterIntoServeState(int health, int score);
+void enterIntoServeState(int health, int score, int level);
 void enterIntoGameOverState(int score);
+void enterIntoVictoryState(int health, int score, int level);
 #endif

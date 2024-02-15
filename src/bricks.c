@@ -16,7 +16,7 @@ void Brick_draw(Brick* brick, Rectangle* squads) {
 void Brick_hit(Brick* brick) {
     PlaySound(globalSounds.brick_hit_2);
 
-    if (brick->tier > -1) {
+    if (brick->tier > 0) {
         if (brick->color == 1) {
             brick->tier--;
             brick->color = 5;
@@ -37,15 +37,15 @@ void Brick_hit(Brick* brick) {
 }
 
 Bricks create_map(int level) {
-    int number_of_rows = randomInt(1, 4);
-    int number_of_cols = randomInt(7, 12);
+    int number_of_rows = 1; // randomInt(1, 4);
+    int number_of_cols = 1; //randomInt(7, 12);
 
     if (number_of_cols % 2 == 1) {
         number_of_cols++;
     }
 
     int highest_tier = MIN(3, floor(level / 5));
-    int highest_color = MIN(5, floor(level % 5 + 3));
+    int highest_color = 1; //MIN(5, floor(level % 5 + 3));
 
     Bricks bricks = (Bricks) {
         .bricks = (Brick*) malloc(sizeof(Brick) * number_of_rows * number_of_cols),

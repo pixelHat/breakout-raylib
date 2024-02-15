@@ -10,4 +10,7 @@ Rectangle* generateQuadsPaddles();
 Rectangle* generateQuadsBalls();
 int randomInt(int min, int max);
 
+void UtilsDrawScore(int score);
+void UtilsDrawHealth(int health, Rectangle* quads);
+
 #endif

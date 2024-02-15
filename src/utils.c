@@ -1,5 +1,9 @@
+#include <stdio.h>
+#include <string.h>
 #include "utils.h"
 #include "textures.h"
+#include "fonts.h"
+#include "constants.h"
 
 Rectangle* generateQuads(Texture texture, int tile_width, int tile_height) {
     int sheet_width  = texture.width / tile_width;
@@ -61,4 +65,26 @@ Rectangle* generateQuadsBalls() {
 
 int randomInt(int min, int max) {
   return min + rand() % (max - min + 1);
+}
+
+void UtilsDrawScore(int score) {
+    char score_str[5];
+    sprintf(score_str, "%d", score);
+    Vector2 measure_score_text = MeasureTextEx(globalFonts.DEFAULT_FONT, "SCORE", 8, 1);
+    DrawTextEx(globalFonts.DEFAULT_FONT, "SCORE", (Vector2) { GAMESCREENWIDTH - 60, 5 }, 8, 1, WHITE);
+    DrawTextEx(globalFonts.DEFAULT_FONT, score_str, (Vector2) { GAMESCREENWIDTH - 50 + measure_score_text.x, 5 }, 8, 1, WHITE);
+}
+
+void UtilsDrawHealth(int health, Rectangle* squads) {
+    int health_x = GAMESCREENWIDTH - 100;
+
+    for(int i = 0; i < health; i++) {
+        DrawTextureRec(globalTextures.hearts, squads[0], (Vector2) { health_x, 4 }, WHITE);
+        health_x += 11;
+    }
+
+    for (int i = 0; i < 3 - health; i++) {
+        DrawTextureRec(globalTextures.hearts, squads[1], (Vector2) { health_x, 4 }, WHITE);
+        health_x += 11;
+    }
 }

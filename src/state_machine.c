@@ -7,6 +7,7 @@
 #include "state_menu.h"
 #include "state_play.h"
 #include "state_serve.h"
+#include "state_victory.h"
 #include "state_game_over.h"
 
 Game game = { STATE_MENU };
@@ -15,7 +16,7 @@ MenuState menuState = { 0 };
 PlayState playState = {};
 GameOverState gameOverState = {};
 
-void setUpPlayState(int health, int score);
+void setUpPlayState(int health, int score, int level);
 
 void Render() {
     switch (game.currentState) {
@@ -27,6 +28,9 @@ void Render() {
             break;
         case STATE_SERVE:
             RenderStateServe(game, &playState);
+            break;
+        case STATE_VICTORY:
+            RenderStateVictory(game, &playState);
             break;
         case STATE_GAME_OVER:
             RenderStateGameOver(game, &gameOverState);
@@ -44,6 +48,9 @@ void Update() {
             break;
         case STATE_SERVE:
             UpdateStateServe(game, &playState);
+            break;
+        case STATE_VICTORY:
+            UpdateStateVictory(game, &playState);
             break;
         case STATE_GAME_OVER:
             UpdateStateGameOver(game, &gameOverState);
@@ -65,19 +72,22 @@ void enterIntoGameOverState(int score) {
     game.currentState = STATE_GAME_OVER;
 }
 
-void enterIntoServeState(int health, int score) {
-    setUpPlayState(health, score);
+void enterIntoServeState(int health, int score, int level) {
+    setUpPlayState(health, score, level);
     game.currentState = STATE_SERVE;
+}
+
+void enterIntoVictoryState(int health, int score, int level) {
+    setUpPlayState(health, score, level);
+    game.currentState = STATE_VICTORY;
 }
 
 // private
 
-void setUpPlayState(int health, int score) {
-    if (playState.quads == NULL) {
-        playState.quads = generateQuadsPaddles();
-        playState.paddle = Paddle_init(1, 0);
-        playState.isPaused = false;
-    }
+void setUpPlayState(int health, int score, int level) {
+    playState.quads = generateQuadsPaddles();
+    playState.paddle = Paddle_init(1, 0);
+    playState.isPaused = false;
     playState.ball = BallInit(0);
     playState.ball_quads = generateQuadsBalls();
     playState.bricks_quads = generateQuadsBricks();
@@ -85,4 +95,5 @@ void setUpPlayState(int health, int score) {
     playState.score = score;
     playState.lives = health;
     playState.hearts_quads = generateQuadsHearts();
+    playState.level = level;
 }

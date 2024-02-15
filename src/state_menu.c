@@ -38,7 +38,7 @@ void RenderStateMenu(Game game, MenuState* state) {
 
 void UpdateStateMenu(Game game, MenuState* state) {
     if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
-        enterIntoServeState(3, 0);
+        enterIntoServeState(3, 0, 0);
     }
     if (IsKeyPressed(KEY_DOWN)) {
         state->selected = (state->selected + 1) % 2;
