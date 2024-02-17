@@ -77,7 +77,7 @@ void UpdateStatePlay(Game game, PlayState* state) {
                 state->ball.position.y = b->position.y + 16;
             }
             state->ball.dy = state->ball.dy * 1.02;
-            state->score += (b->tier * 200 + b->color * 25);
+            state->score += (b->tier * 200 + (b->color + 1) * 25);
             Brick_hit(b);
             if (PlayStateCheckVictory(state)) {
                 PlaySound(globalSounds.victory);
