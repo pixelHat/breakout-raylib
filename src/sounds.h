@@ -12,6 +12,8 @@ typedef struct {
     Sound brick_hit_2;
     Sound hurt;
     Sound victory;
+    Sound high_score;
+    Sound select;
 } Sounds;
 
 extern Sounds globalSounds;

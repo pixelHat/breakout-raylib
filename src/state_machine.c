@@ -10,6 +10,7 @@
 #include "state_victory.h"
 #include "state_game_over.h"
 #include "state_highscores.h"
+#include "state_enter_highscore.h"
 
 Game game = { STATE_MENU };
 
@@ -17,6 +18,7 @@ MenuState menuState = { 0 };
 PlayState playState = {};
 GameOverState gameOverState = {};
 GlobalState  globalState = {};
+EnterHighScoreState enterHighScoreState = {};
 
 void setUpPlayState(int health, int score, int level);
 
@@ -40,6 +42,9 @@ void Render() {
         case STATE_GAME_OVER:
             RenderStateGameOver(game, &gameOverState);
             break;
+        case STATE_ENTERHIGHSCORES:
+            RenderStateEnterHighScore(game, &enterHighScoreState);
+            break;
     }
 }
 
@@ -61,7 +66,10 @@ void Update() {
             UpdateStateHighScores();
             break;
         case STATE_GAME_OVER:
-            UpdateStateGameOver(game, &gameOverState);
+            UpdateStateGameOver(game, &gameOverState, &globalState);
+            break;
+        case STATE_ENTERHIGHSCORES:
+            UpdateStateEnterHighScore(game, &enterHighScoreState, &globalState);
             break;
     }
 }
@@ -92,6 +100,18 @@ void enterIntoVictoryState(int health, int score, int level) {
 
 void enterIntoHighScoresState() {
     game.currentState = STATE_HIGHSCORES;
+}
+
+void enterIntoEnterHighScoreState(Score* scores, int score, int new_high_score_index) {
+    enterHighScoreState.selected = 0;
+    enterHighScoreState.score = score;
+    enterHighScoreState.new_hiscore_index = new_high_score_index;
+    enterHighScoreState.name = (char*) malloc(sizeof(char) * 4);
+    enterHighScoreState.name[0] = 'A';
+    enterHighScoreState.name[1] = 'A';
+    enterHighScoreState.name[2] = 'A';
+    enterHighScoreState.name[3] = '\0';
+    game.currentState = STATE_ENTERHIGHSCORES;
 }
 
 void StateMachineSetScore() {

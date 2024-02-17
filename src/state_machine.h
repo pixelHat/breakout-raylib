@@ -14,6 +14,7 @@ typedef enum {
     STATE_GAME_OVER,
     STATE_VICTORY,
     STATE_HIGHSCORES,
+    STATE_ENTERHIGHSCORES,
 } GameState;
 
 typedef struct {
@@ -46,6 +47,13 @@ typedef struct {
     Score* scores;
 } GlobalState;
 
+typedef struct {
+    int score;
+    int new_hiscore_index;
+    int selected;
+    char* name;
+} EnterHighScoreState;
+
 void DrawTitle();
 void DrawPlay();
 
@@ -57,5 +65,6 @@ void enterIntoServeState(int health, int score, int level);
 void enterIntoGameOverState(int score);
 void enterIntoVictoryState(int health, int score, int level);
 void enterIntoHighScoresState();
+void enterIntoEnterHighScoreState(Score* scores, int score, int new_hiscore_index);
 void StateMachineSetScore();
 #endif

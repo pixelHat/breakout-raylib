@@ -91,7 +91,7 @@ void UtilsDrawHealth(int health, Rectangle* squads) {
 }
 
 Score* UtilsLoadScore() {
-    FILE* file = fopen("breakout.lst", "r+");
+    FILE* file = fopen("breakout.lst", "a+");
     if(file == NULL) {
         exit(1);
     }
@@ -118,10 +118,6 @@ Score* UtilsLoadScore() {
             counter++;
         }
         name = !name;
-    }
-
-    for (int i = 0; i < 10; i++) {
-        printf("%s: %d\n", scores[i].name, scores[i].score);
     }
 
     fclose(file);

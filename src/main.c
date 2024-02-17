@@ -11,16 +11,12 @@
 #include "utils.h"
 
 int main(void) {
-
-
     time_t t;
     srand((unsigned) time(&t));
 
     SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
     InitWindow(SCREENWIDTH, SCREENHEIGHT, "Breakout");
     SetWindowMinSize(320, 240);
-
-    Score* scores = UtilsLoadScore();
 
     Texture2D background = LoadTexture("graphics/background.png");
     NPatchInfo nPatchInfo = { { 0, 0, background.width, background.height }, 12, 12, 12, 12 };

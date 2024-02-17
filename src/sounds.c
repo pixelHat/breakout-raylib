@@ -11,6 +11,8 @@ void LoadGameSounds() {
     globalSounds.brick_hit_2 = LoadSound("sounds/brick-hit-2.wav");
     globalSounds.hurt = LoadSound("sounds/hurt.wav");
     globalSounds.victory = LoadSound("sounds/victory.wav");
+    globalSounds.high_score = LoadSound("sounds/high_score.wav");
+    globalSounds.select = LoadSound("sounds/select.wav");
 }
 
 void UnloadGameSounds() {
@@ -20,4 +22,7 @@ void UnloadGameSounds() {
     UnloadSound(globalSounds.brick_hit_1);
     UnloadSound(globalSounds.brick_hit_2);
     UnloadSound(globalSounds.hurt);
+    UnloadSound(globalSounds.victory);
+    UnloadSound(globalSounds.high_score);
+    UnloadSound(globalSounds.select);
 }

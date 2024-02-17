@@ -5,7 +5,7 @@
 #define FONT_H
 
 typedef struct Fonts {
-    Font DEFAULT_FONT
+    Font DEFAULT_FONT;
 } Fonts;
 
 extern Fonts globalFonts;
