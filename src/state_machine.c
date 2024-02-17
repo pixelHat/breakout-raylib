@@ -15,7 +15,7 @@
 Game game = { STATE_MENU };
 
 MenuState menuState = { 0 };
-PlayState playState = {};
+PlayState playState = { .playing = true };
 GameOverState gameOverState = {};
 GlobalState  globalState = {};
 EnterHighScoreState enterHighScoreState = {};
@@ -89,7 +89,11 @@ void enterIntoGameOverState(int score) {
 }
 
 void enterIntoServeState(int health, int score, int level) {
-    setUpPlayState(health, score, level);
+    if (playState.lives == 0) {
+        setUpPlayState(health, score, level);
+    } else {
+        playState.ball = BallInit(0);
+    }
     game.currentState = STATE_SERVE;
 }
 

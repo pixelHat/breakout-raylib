@@ -37,6 +37,7 @@ typedef struct {
     int lives;
     Rectangle* hearts_quads;
     int level;
+    bool playing;
 } PlayState;
 
 typedef struct {
