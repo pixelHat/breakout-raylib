@@ -18,9 +18,9 @@ void draw_centered_text(const char* text, int size, int y) {
 void RenderStateGameOver(Game game, GameOverState* state) {
     draw_centered_text("GAME OVER", 32, GAMESCREENHEIGHT / 3.0);
 
-    char score_str[5];
+    char score_str[50];
     sprintf(score_str, "%d", state->score);
-    char text_score[18];
+    char text_score[12+50];
     sprintf(text_score, "Your score: %s", score_str);
     draw_centered_text(text_score, 16, GAMESCREENHEIGHT / 2.0);
 
