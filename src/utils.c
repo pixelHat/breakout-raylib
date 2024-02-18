@@ -48,8 +48,8 @@ Rectangle* generateQuadsBalls() {
     float x = 96;
     float y = 48;
     int counter = 0;
-    Rectangle* quads = (Rectangle*) malloc(sizeof(Rectangle) * 5);
-    for(int i = 0; i < 3; i++) {
+    Rectangle* quads = (Rectangle*) malloc(sizeof(Rectangle) * 7);
+    for(int i = 0; i < 4; i++) {
         quads[counter++] = (Rectangle) { x, y, 8, 8 };
         x += 8;
     }
@@ -57,7 +57,7 @@ Rectangle* generateQuadsBalls() {
     x = 96;
     y = 56;
 
-    for(int i = 0; i < 2; i++) {
+    for(int i = 0; i < 3; i++) {
         quads[counter++] = (Rectangle) { x, y, 8, 8 };
         x += 8;
     }

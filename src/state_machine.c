@@ -148,7 +148,7 @@ void setUpPlayState(int health, int score, int level) {
     playState.quads = generateQuadsPaddles();
     playState.paddle = Paddle_init(1, playState.selected_paddle);
     playState.isPaused = false;
-    playState.ball = BallInit(0);
+    playState.ball = BallInit(randomInt(0, 6));
     playState.ball_quads = generateQuadsBalls();
     playState.bricks_quads = generateQuadsBricks();
     playState.bricks = create_map(0);

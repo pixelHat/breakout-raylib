@@ -16,7 +16,7 @@ Ball BallInit(int skin) {
 }
 
 void BallDraw(Ball* ball, Rectangle* squads) {
-    DrawTextureRec(globalTextures.paddle, squads[ball->skin], ball->position, WHITE);
+    DrawTextureRec(globalTextures.blocks, squads[ball->skin], ball->position, WHITE);
 }
 
 void BallUpdate(Ball* ball) {

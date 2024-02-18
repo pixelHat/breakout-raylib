@@ -51,7 +51,7 @@ void UpdateStatePaddleSelect(Game gameState, PaddleSelectState* paddleSelectStat
         }
     }
 
-    if (IsKeyPressed(KEY_ENTER)) {
+    if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_SPACE)) {
         SetSelectedPaddle(paddleSelectState->current_paddle);
         enterIntoServeState(3, 0, 1);
     }
