@@ -8,8 +8,8 @@
 Paddle Paddle_init(int size, int skin) {
     return (Paddle) {
         .position = (Vector2) { GAMESCREENWIDTH / 2.0 - 32, GAMESCREENHEIGHT - 32 },
-        size = size,
-        skin = skin,
+        .size = size,
+        .skin = skin,
         .width = 64,
         .height = 16,
         .dx = 0

@@ -82,7 +82,7 @@ void Update() {
     }
 }
 
-void enterIntoMenuState(Score* scores) {
+void enterIntoMenuState() {
     menuState.selected = 0;
     game.currentState = STATE_MENU;
 }
