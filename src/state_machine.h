@@ -15,6 +15,7 @@ typedef enum {
     STATE_VICTORY,
     STATE_HIGHSCORES,
     STATE_ENTERHIGHSCORES,
+    STATE_PADDLESELECT
 } GameState;
 
 typedef struct {
@@ -38,6 +39,7 @@ typedef struct {
     Rectangle* hearts_quads;
     int level;
     bool playing;
+    int selected_paddle;
 } PlayState;
 
 typedef struct {
@@ -55,6 +57,12 @@ typedef struct {
     char* name;
 } EnterHighScoreState;
 
+typedef struct {
+    int current_paddle;
+    Rectangle* arrows_quads;
+    Rectangle* paddles_quads;
+} PaddleSelectState;
+
 void DrawTitle();
 void DrawPlay();
 
@@ -67,5 +75,7 @@ void enterIntoGameOverState(int score);
 void enterIntoVictoryState(int health, int score, int level);
 void enterIntoHighScoresState();
 void enterIntoEnterHighScoreState(Score* scores, int score, int new_hiscore_index);
+void enterIntoPaddleSelectState();
 void StateMachineSetScore();
+void SetSelectedPaddle(int selected_paddle);
 #endif

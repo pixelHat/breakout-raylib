@@ -14,6 +14,7 @@ typedef struct {
     Sound victory;
     Sound high_score;
     Sound select;
+    Sound no_select;
 } Sounds;
 
 extern Sounds globalSounds;

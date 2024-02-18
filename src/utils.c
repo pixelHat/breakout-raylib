@@ -32,8 +32,8 @@ Rectangle* generateQuadsPaddles() {
     float x = 0;
     float y = 64;
     int counter = 0;
-    Rectangle* quads = (Rectangle*) malloc(sizeof(Rectangle) * 12);
-    for(int i = 0; i < 3; i++) {
+    Rectangle* quads = (Rectangle*) malloc(sizeof(Rectangle) * 16);
+    for(int i = 0; i < 4; i++) {
         quads[counter++] = (Rectangle) { x, y, 32, 16 };
         quads[counter++] = (Rectangle) { x + 32, y, 64, 16 };
         quads[counter++] = (Rectangle) { x + 96, y, 96, 16 };
@@ -62,6 +62,10 @@ Rectangle* generateQuadsBalls() {
         x += 8;
     }
     return quads;
+}
+
+Rectangle* generateQuadsArrows() {
+    return generateQuads(globalTextures.arrows, 24, 24);
 }
 
 int randomInt(int min, int max) {

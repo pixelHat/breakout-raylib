@@ -11,6 +11,7 @@
 #include "state_game_over.h"
 #include "state_highscores.h"
 #include "state_enter_highscore.h"
+#include "state_paddle_select.h"
 
 Game game = { STATE_MENU };
 
@@ -19,6 +20,7 @@ PlayState playState = { .playing = true };
 GameOverState gameOverState = {};
 GlobalState  globalState = {};
 EnterHighScoreState enterHighScoreState = {};
+PaddleSelectState paddleSelectState = { 0 };
 
 void setUpPlayState(int health, int score, int level);
 
@@ -45,6 +47,9 @@ void Render() {
         case STATE_ENTERHIGHSCORES:
             RenderStateEnterHighScore(game, &enterHighScoreState);
             break;
+        case STATE_PADDLESELECT:
+            RenderStatePaddleSelect(game, &paddleSelectState);
+            break;
     }
 }
 
@@ -70,6 +75,9 @@ void Update() {
             break;
         case STATE_ENTERHIGHSCORES:
             UpdateStateEnterHighScore(game, &enterHighScoreState, &globalState);
+            break;
+        case STATE_PADDLESELECT:
+            UpdateStatePaddleSelect(game, &paddleSelectState);
             break;
     }
 }
@@ -118,16 +126,27 @@ void enterIntoEnterHighScoreState(Score* scores, int score, int new_high_score_i
     game.currentState = STATE_ENTERHIGHSCORES;
 }
 
+void enterIntoPaddleSelectState() {
+    paddleSelectState.current_paddle = 0;
+    paddleSelectState.arrows_quads = generateQuadsArrows();
+    paddleSelectState.paddles_quads = generateQuadsPaddles();
+    game.currentState = STATE_PADDLESELECT;
+}
+
 void StateMachineSetScore() {
     Score* scores = UtilsLoadScore();
     globalState.scores = scores;
+}
+
+void SetSelectedPaddle(int selected_paddle) {
+    playState.selected_paddle = selected_paddle;
 }
 
 // private
 
 void setUpPlayState(int health, int score, int level) {
     playState.quads = generateQuadsPaddles();
-    playState.paddle = Paddle_init(1, 0);
+    playState.paddle = Paddle_init(1, playState.selected_paddle);
     playState.isPaused = false;
     playState.ball = BallInit(0);
     playState.ball_quads = generateQuadsBalls();

@@ -13,6 +13,7 @@ void LoadGameSounds() {
     globalSounds.victory = LoadSound("sounds/victory.wav");
     globalSounds.high_score = LoadSound("sounds/high_score.wav");
     globalSounds.select = LoadSound("sounds/select.wav");
+    globalSounds.no_select = LoadSound("sounds/no-select.wav");
 }
 
 void UnloadGameSounds() {
@@ -25,4 +26,5 @@ void UnloadGameSounds() {
     UnloadSound(globalSounds.victory);
     UnloadSound(globalSounds.high_score);
     UnloadSound(globalSounds.select);
+    UnloadSound(globalSounds.no_select);
 }

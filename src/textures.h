@@ -8,6 +8,7 @@
 typedef struct {
     Texture paddle;
     Texture hearts;
+    Texture arrows;
 } GlobalTextures;
 
 extern GlobalTextures globalTextures;

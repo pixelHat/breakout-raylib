@@ -14,6 +14,7 @@ Rectangle* generateQuadsHearts();
 Rectangle* generateQuadsBricks();
 Rectangle* generateQuadsPaddles();
 Rectangle* generateQuadsBalls();
+Rectangle* generateQuadsArrows();
 int randomInt(int min, int max);
 
 void UtilsDrawScore(int score);

@@ -39,7 +39,8 @@ void RenderStateMenu(Game game, MenuState* state) {
 void UpdateStateMenu(Game game, MenuState* state) {
     if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
         if (state->selected == 0) {
-            enterIntoServeState(3, 0, 0);
+            enterIntoPaddleSelectState();
+            // enterIntoServeState(3, 0, 0);
         } else {
             enterIntoHighScoresState();
         }
