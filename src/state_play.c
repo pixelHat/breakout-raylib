@@ -11,18 +11,16 @@
 #include "constants.h"
 #include "ball.h"
 #include "bricks.h"
+#include "utils.h"
 
 #ifndef STATE_MENU_H
 #define STATE_MENU_H
 
-void draw_score(int score);
-void draw_health(int health, Rectangle* hearts_quads);
-
 void RenderStatePlay(Game game, PlayState* state) {
     Paddle_draw(&state->paddle, state->quads);
     BallDraw(&state->ball, state->ball_quads);
-    draw_score(state->score);
-    draw_health(state->lives, state->hearts_quads);
+    UtilsDrawScore(state->score);
+    UtilsDrawHealth(state->lives, state->hearts_quads);
 
     for (int i = 0; i < state->bricks.size; i++) {
         Brick_draw(&state->bricks.bricks[i], state->bricks_quads);
@@ -81,7 +79,7 @@ void UpdateStatePlay(Game game, PlayState* state) {
             Brick_hit(b);
             if (PlayStateCheckVictory(state)) {
                 PlaySound(globalSounds.victory);
-                enterIntoVictoryState(state->lives, state->score, state->lives + 1);
+                enterIntoVictoryState(state->lives, state->score, state->level + 1);
             }
         }
 
@@ -115,28 +113,6 @@ void UpdateStatePlay(Game game, PlayState* state) {
         }
     }
 
-}
-
-void draw_health(int health, Rectangle* squads) {
-    int health_x = GAMESCREENWIDTH - 100;
-
-    for(int i = 0; i < health; i++) {
-        DrawTextureRec(globalTextures.hearts, squads[0], (Vector2) { health_x, 4 }, WHITE);
-        health_x += 11;
-    }
-
-    for (int i = 0; i < 3 - health; i++) {
-        DrawTextureRec(globalTextures.hearts, squads[1], (Vector2) { health_x, 4 }, WHITE);
-        health_x += 11;
-    }
-}
-
-void draw_score(int score) {
-    char score_str[5];
-    sprintf(score_str, "%d", score);
-    Vector2 measure_score_text = MeasureTextEx(globalFonts.DEFAULT_FONT, "SCORE", 8, 1);
-    DrawTextEx(globalFonts.DEFAULT_FONT, "SCORE", (Vector2) { GAMESCREENWIDTH - 60, 5 }, 8, 1, WHITE);
-    DrawTextEx(globalFonts.DEFAULT_FONT, score_str, (Vector2) { GAMESCREENWIDTH - 50 + measure_score_text.x, 5 }, 8, 1, WHITE);
 }
 
 bool PlayStateCheckVictory(PlayState* state) {

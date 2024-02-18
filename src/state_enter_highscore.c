@@ -7,7 +7,7 @@
 #include "constants.h"
 #include "sounds.h"
 
-void _drawChar(char* ch, Color color, int offset) {
+void EnterHighscoreDrawChar(char* ch, Color color, int offset) {
     const Vector2 position = {
         GAMESCREENWIDTH / 2.0 - offset,
         GAMESCREENHEIGHT / 2.0
@@ -16,7 +16,7 @@ void _drawChar(char* ch, Color color, int offset) {
     DrawTextEx(globalFonts.DEFAULT_FONT, &ch2, position, 32, 1, color);
 }
 
-void _saveScores(const Score* scores) {
+void EnterHighscoreSaveScores(const Score* scores) {
     FILE* file = fopen("breakout.lst", "w+");
     if(file == NULL) {
         exit(1);
@@ -37,9 +37,9 @@ void RenderStateEnterHighScore(Game game, EnterHighScoreState* state) {
     sprintf(score_str, "%d", state->score);
     strcat(score_text, score_str);
     UtilsDrawCenteredText(score_text, 16, 30);
-    _drawChar(&state->name[0], state->selected == 0 ? selected_color : WHITE, 28);
-    _drawChar(&state->name[1], state->selected == 1 ? selected_color : WHITE, 6);
-    _drawChar(&state->name[2], state->selected == 2 ? selected_color : WHITE, -20);
+    EnterHighscoreDrawChar(&state->name[0], state->selected == 0 ? selected_color : WHITE, 28);
+    EnterHighscoreDrawChar(&state->name[1], state->selected == 1 ? selected_color : WHITE, 6);
+    EnterHighscoreDrawChar(&state->name[2], state->selected == 2 ? selected_color : WHITE, -20);
     UtilsDrawCenteredText("Press Enter to confirm!", 8, GAMESCREENHEIGHT - 18);
 }
 
@@ -55,7 +55,7 @@ void UpdateStateEnterHighScore(Game game, EnterHighScoreState* state, GlobalStat
             next = prev;
         }
 
-        _saveScores(globalState->scores);
+        EnterHighscoreSaveScores(globalState->scores);
 
         enterIntoHighScoresState();
     }
