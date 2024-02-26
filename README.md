@@ -7,7 +7,7 @@ Create a classic and engaging Breakout game using Raylib. This project serves as
 - Visually appealing using assets from CS50 Game Development (https://www.classcentral.com/report/edx-top-courses/)
 - User-friendly controls
 - WebAssembly (WASM) build for online play
-- Hosted online at https://github.com/eliasdaler/ebiten_breakout
+- Hosted online at [https://pixelhat.github.io/breakout-raylib/](https://pixelhat.github.io/breakout-raylib/)
 
 # Getting Started:
 
@@ -22,7 +22,7 @@ Create a classic and engaging Breakout game using Raylib. This project serves as
          - Building WASM: make wasm
     - Run the game: ./game (or the corresponding executable in the dist directory)
 - Online Play:
-    - Visit: https://github.com/eliasdaler/ebiten_breakout
+    - Visit: [https://pixelhat.github.io/breakout-raylib/](https://pixelhat.github.io/breakout-raylib/)
 
 # Building the WASM Version:
 
